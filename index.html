@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmDoc</title>
+    <link rel="stylesheet" href="css/yash.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <h1>
+            <img src="assets/images/logo.jpg" alt="FarmDoc Logo"> FarmDoc
+        </h1>
+        <ul>
+            <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="#chatbot-container" onclick="showChatbot()"><i class="fas fa-comment"></i> Chatbot</a></li>
+            <li><a href="#map-container" onclick="showMap()"><i class="fas fa-map-marker-alt"></i> Health centres</a></li>
+            <li><a href="#weather-box" onclick="showClimate()"><i class="fas fa-cloud-sun"></i> Weather</a></li>
+            <li><a href="#image-recognition" onclick="showImageRecognition()"><i class="fas fa-camera"></i> Image Recognition</a></li>
+            <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+        </ul>
+        <div id="google_translate_element"></div>
+        
+        <footer>
+            <p>&copy; 2025 FarmDoc. All Rights Reserved.</p>
+        </footer>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="top-right-logo">
+                <img src="assets/images/Vignan_logo.png" alt="Secondary Logo">
+            </div>
+            <h1>Welcome to FarmDoc</h1>
+            <p>Your trusted companion for health and wellness.</p>
+            <div style="width: 100%; max-width: 90vw; height: 600px; margin-top: 0px; z-index: 2; position: relative; margin-bottom: 10px;">
+                <!-- Chatbot iframe -->
+                <div id="chatbot-container" style="width: 100%; height: 100%;">
+                    <iframe src="https://www.chatbase.co/chatbot-iframe/AgVHlK7rZz7MHmHuK1dwU"
+                        title="Chatbot"
+                        width="100%" 
+                        height="100%" 
+                        style="border:0; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);">
+                    </iframe>
+                </div>
+
+                <!-- Map Section -->
+                <div id="map-container" style="display: none; width: 100%; height: 100%;">
+                    <iframe src="https://www.google.com/maps?q=farmer+health+centres+near+me&output=embed"
+                        width="100%" 
+                        height="100%" 
+                        style="border:0; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);" 
+                        allowfullscreen 
+                        loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+        </section>
+
+        <section id="image-recognition" class="image-recognition">
+            <h2>Crop Disease Prediction Tool</h2>
+            <div class="iframe-container">
+                <iframe 
+                    src="https://jayanthk2004-crop-disease-prediction.hf.space" 
+                    title="Crop Disease Prediction Tool"
+                    width="100%" 
+                    height="600px" 
+                    style="border: 1px solid #ccc; border-radius: 10px;">
+                </iframe>
+            </div>
+        </section>
+
+        <!-- Weather Section -->
+        <div id="weather-box" style="display: none;">
+            <h2>Weather in Your Area</h2>
+            <p id="weather-info">Fetching weather data...</p>
+        </div>
+
+        <!-- Features Section -->
+        <section id="features" class="features">
+            <h2>Our Features</h2>
+            <div class="row">
+                <div class="card">
+                    <img src="assets/images/diagnosis.jpeg" alt="Feature 1">
+                    <p>Track your health status and get personalized recommendations for better care.</p>
+                </div>
+                <div class="card">
+                    <img src="assets/images/health centres.jpeg" alt="Feature 2">
+                    <p>Find the nearest health centers and access emergency services quickly.</p>
+                </div>
+                <div class="card">
+                    <img src="assets/images/medisines.jpeg" alt="Feature 3">
+                    <p>Order medicines online and get them delivered to your doorstep.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact">
+            <h2>Contact Us</h2>
+            <div class="contact-content">
+                <form id="contactForm">
+                    <input type="text" id="name" name="name" placeholder="Your Name" required>
+                    <input type="email" id="email" name="email" placeholder="Your Email" required>
+                    <textarea id="message" name="message" rows="4" placeholder="Your Message" required></textarea>
+                    <button type="submit">Send Message</button>
+                </form>
+
+               
+        </section>
+
+        
+
+
+    </div>
+
+    <div id="messages"></div>
+
+    <!-- Google Translate API -->
+    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script>
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element');
+        }
+    </script>
+   <script>
+    function showChatbot() {
+        document.getElementById('chatbot-container').style.display = 'block';
+        document.getElementById('map-container').style.display = 'none';
+        document.getElementById('image-recognition').style.display = 'none';
+        document.getElementById('weather-box').style.display = 'none';
+    }
+
+    function showMap() {
+        document.getElementById('chatbot-container').style.display = 'none';
+        document.getElementById('map-container').style.display = 'block';
+        document.getElementById('image-recognition').style.display = 'none';
+        document.getElementById('weather-box').style.display = 'none';
+    }
+
+    function showImageRecognition() {
+        document.getElementById('image-recognition').style.display = 'block';
+
+        if (document.getElementById('map-container').style.display === 'block') {
+            document.getElementById('map-container').style.display = 'block';
+            document.getElementById('chatbot-container').style.display = 'none';
+        } else {
+            document.getElementById('chatbot-container').style.display = 'block';
+            document.getElementById('map-container').style.display = 'none';
+        }
+
+        document.getElementById('weather-box').style.display = 'none';
+    }
+
+    function showClimate() {
+        document.getElementById('weather-box').style.display = 'block';
+
+        if (document.getElementById('map-container').style.display === 'block') {
+            document.getElementById('map-container').style.display = 'block';
+            document.getElementById('chatbot-container').style.display = 'none';
+        } else {
+            document.getElementById('chatbot-container').style.display = 'block';
+            document.getElementById('map-container').style.display = 'none';
+        }
+
+        document.getElementById('image-recognition').style.display = 'none';
+    }
+</script>
+<script>
+    const apiKey = '764c4554df9c25163303cf9df0452f7e'; // Replace this with your real API key
+    
+    function fetchWeather(lat, lon) {
+        const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                const temp = data.main.temp;
+                const condition = data.weather[0].description;
+                const city = data.name;
+                const humidity = data.main.humidity;
+                const wind = data.wind.speed;
+    
+                document.getElementById('weather-info').innerHTML = `
+                    <strong>Location:</strong> ${city}<br>
+                    <strong>Temperature:</strong> ${temp}°C<br>
+                    <strong>Condition:</strong> ${condition}<br>
+                    <strong>Humidity:</strong> ${humidity}%<br>
+                    <strong>Wind Speed:</strong> ${wind} m/s
+                `;
+            })
+            .catch(error => {
+                document.getElementById('weather-info').innerText = 'Failed to fetch weather data.';
+                console.error(error);
+            });
+    }
+    
+    // Get user's location
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            position => {
+                const lat = position.coords.latitude;
+                const lon = position.coords.longitude;
+                fetchWeather(lat, lon);
+            },
+            error => {
+                document.getElementById('weather-info').innerText = 'Location access denied.';
+            }
+        );
+    } else {
+        document.getElementById('weather-info').innerText = 'Geolocation not supported by this browser.';
+    }
+</script>
+<!-- Firebase SDK -->
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+<script>
+    // Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyAeVnRfFaMcZuw2U4w4CKs_NhPKQblG2D8",
+        authDomain: "yash-19.firebaseapp.com",
+        databaseURL: "https://yash-19-default-rtdb.firebaseio.com",
+        projectId: "yash-19",
+        storageBucket: "yash-19.appspot.com",
+        messagingSenderId: "856898183205",
+        appId: "1:856898183205:web:03906c37c0b360c46c5fcc",
+        measurementId: "G-N4TX0939Q1"
+    };
+
+    // Initialize Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+
+    // Initialize Realtime Database
+    const database = firebase.database();
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("contactForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+            console.log("Form submitted");
+
+            // Get values
+            const name = document.getElementById("name").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const message = document.getElementById("message").value.trim();
+
+            if (!name || !email || !message) {
+                alert("Please fill in all fields.");
+                return;
+            }
+
+            // Save to Firebase
+            const contactsRef = firebase.database().ref("contacts");
+
+            contactsRef.push({
+                name: name,
+                email: email,
+                message: message,
+                timestamp: new Date().toISOString()
+            }).then(() => {
+                alert("Message sent successfully!");
+                document.getElementById("contactForm").reset();
+                document.getElementById("contactForm").insertAdjacentHTML(
+                    "afterend",
+                    "<p style='color: green;'>Your message has been sent successfully!</p>"
+                );
+            }).catch((error) => {
+                alert("Error sending message. Please try again.");
+                console.error("Firebase Error:", error.message);
+            });
+        });
+    });
+</script>
+</body>
+</html>
